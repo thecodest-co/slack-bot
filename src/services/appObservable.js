@@ -13,9 +13,9 @@ module.exports = {
         apps.delete(appId);
     },
     notifyAll(event) {
-        console.log(`notifying all`)
-        apps.forEach((url, observerId) => {
-            console.log(`${url}`)
+        console.log(`notifying all:`)
+        apps.forEach((url, appId) => {
+            console.log(`->${appId}`)
             axios.post( url, event)
                 .then(function (response) {
                     console.log('ok');

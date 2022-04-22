@@ -1,6 +1,6 @@
 const {App, ExpressReceiver} = require('@slack/bolt');
-const appsRouter = require("../routes/apps");
-const appObservable = require("./appObservable");
+const appsRouter = require('./routes/apps');
+const appObservable = require('./services/appObservable');
 require('dotenv').config();
 
 const APP_PORT = process.env.PORT || 3000;
