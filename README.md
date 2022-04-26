@@ -2,7 +2,7 @@
 
 ## Example "third-party" app
 
-https://github.com/sawicki-rafal/say-hello-app
+https://github.com/codesthq/say-hello-app
 
 ## Bot prerequisites
 
