@@ -1,22 +1,18 @@
 {
-  "name": "slack-bot-mvp",
-  "version": "0.0.0",
-  "description": "",
-  "main": "src",
+  "name": "bolt-js-aws-lambda-receiver",
+  "version": "1.0.0",
+  "description": "Deploying to AWS Lambda ⚡️ Bolt for JavaScript using the AwsLambdaReceiver",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@slack/bolt": "^3.11.0",
-    "axios": "^0.26.1",
-    "express": "^4.17.3"
+    "@slack/bolt": "^3.2.0"
   },
   "devDependencies": {
-    "dotenv": "^16.0.0",
-    "nodemon": "^2.0.15"
+    "serverless": "^2.13.0",
+    "serverless-offline": "^6.8.0"
   }
 }
