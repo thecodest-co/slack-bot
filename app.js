@@ -1,4 +1,6 @@
-const { App, AwsLambdaReceiver } = require('@slack/bolt');
+const {App, AwsLambdaReceiver} = require('@slack/bolt');
+const db = require("./db");
+// const db = require('./db');
 
 // Initialize your custom receiver
 const awsLambdaReceiver = new AwsLambdaReceiver({
@@ -9,18 +11,10 @@ const awsLambdaReceiver = new AwsLambdaReceiver({
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
     receiver: awsLambdaReceiver,
-
-    // When using the AwsLambdaReceiver, processBeforeResponse can be omitted.
-    // If you use other Receivers, such as ExpressReceiver for OAuth flow support
-    // then processBeforeResponse: true is required. This option will defer sending back
-    // the acknowledgement until after your handler has run to ensure your function
-    // isn't terminated early by responding to the HTTP request that triggered it.
-
-    // processBeforeResponse: true
 });
 
 // Listens to incoming messages that contain "hello"
-app.message('hello', async ({ message, say }) => {
+app.message('hello', async ({message, say}) => {
     // say() sends a message to the channel where the event was triggered
     await say({
         blocks: [
@@ -44,15 +38,29 @@ app.message('hello', async ({ message, say }) => {
     });
 });
 
-// Listens for an action from a button click
-app.action('button_click', async ({ body, ack, say }) => {
-    await ack();
+// // Listens for an action from a button click
+// app.action('button_click', async ({ body, ack, say }) => {
+//     await ack();
+//
+//     await say(`<@${body.user.id}> clicked the button`);
+// });
 
-    await say(`<@${body.user.id}> clicked the button`);
+// Listens to incoming messages that contain "goodbye"
+app.message('apps', async ({message, say}) => {
+    // say() sends a message to the channel where the event was triggered
+    const apps = await db.getAllApplications();
+    apps.forEach(async function (app) {
+        await say(`See ::::${app.name}`)
+    });
+    // db.getAllApplications().then(r => r.forEach(async function(a) {
+    //
+    //     console.log(`::::${a.name}`)
+    // }));
+
 });
 
 // Listens to incoming messages that contain "goodbye"
-app.message('goodbye', async ({ message, say }) => {
+app.message('goodbye', async ({message, say}) => {
     // say() sends a message to the channel where the event was triggered
     await say(`See ya later, <@${message.user}> :wave:`);
 });

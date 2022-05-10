@@ -2,3 +2,5 @@
 /node_modules/
 /.idea/
 /.serverless/
+config.json
+db_test.js
