@@ -38,5 +38,3 @@ functions:
       - http:
           path: applications
           method: post
-plugins:
-  - serverless-offline
