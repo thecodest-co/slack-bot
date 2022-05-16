@@ -1,8 +1,7 @@
 {
-  "name": "bolt-js-aws-lambda-receiver",
+  "name": "slack-bot-mvp-cody",
   "version": "1.0.0",
-  "description": "Deploying to AWS Lambda ⚡️ Bolt for JavaScript using the AwsLambdaReceiver",
-  "main": "src/functions/bot/app.js",
+  "description": "Cody - slack bot app for The Codest",
   "scripts": {
     "start": "serverless offline --noPrependStageInUrl",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +13,7 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "serverless": "^2.13.0",
+    "serverless": "^3.17.0",
     "serverless-offline": "^8.7.0"
   }
 }
