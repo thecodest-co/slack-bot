@@ -8,7 +8,7 @@ on:
 
 jobs:
    build:
-    name: Build
+    name: Build & DEPLOY
     runs-on: ubuntu-latest
     environment: stagging
 
@@ -23,18 +23,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm install
-
-   deploy:
-     name: Deploy to stagging
-     runs-on: ubuntu-latest
-     environment: stagging
-     needs: [ build ]
-
-     steps:
       - name: serverless deploy
         uses: serverless/github-action@v2
         with:
-          args: deploy -s -c serverless.yml
+          args: deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
