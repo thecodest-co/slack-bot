@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build & Deploy
     runs-on: ubuntu-latest
     environment: stagging
 
@@ -18,17 +18,6 @@ jobs:
       matrix:
         node-version: [ 14.x ]
     steps:
-      - name: Cache node modules
-        id: cache-nodemodules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: node_modules
-          key: build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            build-${{ env.cache-name }}-
-            build-
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -36,19 +25,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm ci
-
-  deploy:
-    name: Deploy to stagging
-    runs-on: ubuntu-latest
-    environment: stagging
-    needs: [ build ]
-
-    steps:
-      - name: Load node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
       - uses: actions/checkout@v3
       - name: serverless deploy
         uses: serverless/github-action@v2
