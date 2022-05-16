@@ -4,7 +4,7 @@
   "description": "Cody - slack bot app for The Codest",
   "scripts": {
     "start": "serverless offline --noPrependStageInUrl",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No test specified\" && exit 0"
   },
   "license": "MIT",
   "dependencies": {
