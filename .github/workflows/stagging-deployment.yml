@@ -7,8 +7,8 @@ on:
     branches: [ develop ]
 
 jobs:
-   build:
-    name: Build & DEPLOY
+   deploy:
+    name: Build & deploy
     runs-on: ubuntu-latest
     environment: stagging
 
