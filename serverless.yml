@@ -15,25 +15,25 @@ provider:
 
 functions:
   message-event:
-    handler: functions/bot/message-event.handler
+    handler: src/functions/bot/message-event.handler
     events:
       - http:
           path: slack/events
           method: post
   message-sender:
-    handler: functions/bot/message-sender.handler
+    handler: src/functions/bot/message-sender.handler
     events:
       - http:
           path: slack/messages
           method: post
   get-applications:
-    handler: functions/apps-registry/get-all-applications.handler
+    handler: src/functions/apps-registry/get-all-applications.handler
     events:
       - http:
           path: applications
           method: get
   register-application:
-    handler: functions/apps-registry/register-application.handler
+    handler: src/functions/apps-registry/register-application.handler
     events:
       - http:
           path: applications
