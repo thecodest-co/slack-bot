@@ -9,12 +9,12 @@ module.exports = {
     addApp(appName, url, events) {
         return db.registerApp(appName, url, events);
     },
-    async notifyAllBy(eventName, event) {
+    async notifyAllBy(eventName, data) {
         const apps = await db.getApplicationsByEvents([eventName]);
-        for(const app in apps) {
-            console.log(`${app.name}::${app.url}`)
+        for (const i in apps) {
+            const app = apps[i];
             try {
-                await axios.post(app.url, event);
+                await axios.post(app.url, data);
                 console.log(`Send ${eventName} to ${app.name}`);
             } catch (error) {
                 console.log(error);
