@@ -1,15 +1,13 @@
 const {botApp, awsLambdaReceiver} = require("../../helpers/aws-slack-bot");
 const appsRegistry = require('../../helpers/apps-registry')
 
-botApp.event('message', async ({event,logger}) => {
-    try {
-        // Call chat.postMessage with the built-in client
-        const result = await appsRegistry.notifyAllBy("MESSAGE", event);
-        logger.info(result);
+botApp.event('message', async ({event, say,message}) => {
+    if (event.text === '!hello') {
+        await say(`Hey there <@${message.user}>!`);
+    } else if (event.text === '!goodbye') {
+        await say(`See ya later, <@${message.user}> :wave:`);
     }
-    catch (error) {
-        logger.error(error);
-    }
+    await appsRegistry.notifyAllBy("MESSAGE", event);
 });
 
 // Handle the Lambda function event

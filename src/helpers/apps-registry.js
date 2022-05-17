@@ -1,6 +1,5 @@
 const axios = require('axios').default;
 const db = require("./db");
-const {botApp} = require("./aws-slack-bot");
 
 module.exports = {
     getAll() {
