@@ -14,7 +14,7 @@ module.exports = {
             console.log(`${name}::${url}`)
             axios.post(url, event)
                 .then(function (response) {
-                    console.log('ok');
+                    console.log(`Send ${eventName} to ${name}`);
                 })
                 .catch(function (error) {
                     console.log(error);
