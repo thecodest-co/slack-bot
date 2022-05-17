@@ -13,5 +13,6 @@ botApp.event('message', async ({event, say,message}) => {
 // Handle the Lambda function event
 module.exports.handler = async (event, context, callback) => {
     const handler = await awsLambdaReceiver.start();
+    context.callbackWaitsForEmptyEventLoop = false;
     return handler(event, context, callback);
 }
