@@ -1,5 +1,6 @@
 const axios = require('axios').default;
 const db = require("./db");
+const {botApp} = require("./aws-slack-bot");
 
 module.exports = {
     getAll() {
@@ -10,15 +11,14 @@ module.exports = {
     },
     async notifyAllBy(eventName, event) {
         const apps = await db.getApplicationsByEvents([eventName]);
-        apps.forEach(({name, url}) => {
-            console.log(`${name}::${url}`)
-            axios.post(url, event)
-                .then(function (response) {
-                    console.log(`Send ${eventName} to ${name}`);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        })
+        for(const app in apps) {
+            console.log(`${app.name}::${app.url}`)
+            try {
+                await axios.post(app.url, event);
+                console.log(`Send ${eventName} to ${app.name}`);
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 };
