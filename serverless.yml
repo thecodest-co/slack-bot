@@ -1,4 +1,4 @@
-service: serverless-slack-bot
+service: serverless-slackbot
 frameworkVersion: '2'
 
 provider:
@@ -26,6 +26,19 @@ functions:
       - http:
           path: slack/messages
           method: post
+  get-users:
+    handler: src/functions/bot/get-users.handler
+    events:
+      - http:
+          path: slack/users
+          method: get
+  create-converstaions:
+    handler: src/functions/bot/create-conversation.handler
+    events:
+      - http:
+          path: slack/conversations
+          method: post
+
   get-applications:
     handler: src/functions/apps-registry/get-all-applications.handler
     events:
