@@ -14,14 +14,14 @@ provider:
     DB_PASSWORD: ${env:DB_PASSWORD}
 
 functions:
-  message-event:
-    handler: src/functions/bot/message-event.handler
+  handle-message-event:
+    handler: src/functions/bot/handle-message-event.handler
     events:
       - http:
           path: slack/events
           method: post
-  message-sender:
-    handler: src/functions/bot/message-sender.handler
+  send-message:
+    handler: src/functions/bot/send-message.handler
     events:
       - http:
           path: slack/messages

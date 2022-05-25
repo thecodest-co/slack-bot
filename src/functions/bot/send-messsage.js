@@ -7,8 +7,7 @@ module.exports.handler = async (event, context, callback) => {
     const data = JSON.parse(event.body);
 
     try {
-        // Call chat.scheduleMessage with the built-in client
-        const result = await botApp.client.chat.postMessage({
+        await botApp.client.chat.postMessage({
             channel: data.channel,
             text: data.text
         });
