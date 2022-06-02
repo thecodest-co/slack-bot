@@ -12,32 +12,48 @@ provider:
     DB_NAME: ${env:DB_NAME}
     DB_USER: ${env:DB_USER}
     DB_PASSWORD: ${env:DB_PASSWORD}
+  apiGateway:
+    apiKeys:
+      - value: ${env:CONVERSATION_BUILDER_API_KEY}
+        description: Api key for conversation builder app
+        customerId: conversation-builder
 
 functions:
-  handle-message-event:
-    handler: src/functions/bot/handle-message-event.handler
+  handle-events:
+    handler: src/functions/bot/handle-events.handler
     events:
       - http:
           path: slack/events
           method: post
+          private: true
   send-message:
     handler: src/functions/bot/send-message.handler
     events:
       - http:
           path: slack/messages
           method: post
+          private: true
+  schedule-message:
+    handler: src/functions/bot/schedule-message.handler
+    events:
+      - http:
+          path: slack/schedule-messages
+          method: post
+          private: true
   get-users:
     handler: src/functions/bot/get-users.handler
     events:
       - http:
           path: slack/users
           method: get
+          private: true
   create-converstaions:
     handler: src/functions/bot/create-conversation.handler
     events:
       - http:
           path: slack/conversations
           method: post
+          private: true
 
   get-applications:
     handler: src/functions/apps-registry/get-all-applications.handler
@@ -45,9 +61,11 @@ functions:
       - http:
           path: applications
           method: get
+          private: true
   register-application:
     handler: src/functions/apps-registry/register-application.handler
     events:
       - http:
           path: applications
           method: post
+          private: true
