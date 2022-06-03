@@ -1,0 +1,44 @@
+name: Build & deploy to stagging
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  build_if_merged:
+    if: github.event.pull_request.merged == true
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    environment: staging
+
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: serverless deploy
+        uses: serverless/github-action@v2
+        with:
+          args: deploy --conceal --stage prod
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          CONVERSATION_BUILDER_API_KEY: ${{ secrets.CONVERSATION_BUILDER_API_KEY }}
+          WELCOME_MESSAGE_DELAY_DAYS: ${{ secrets.WELCOME_MESSAGE_DELAY_DAYS }}
+          WELCOME_MESSAGE_DELAY_HOURS: ${{ secrets.WELCOME_MESSAGE_DELAY_HOURS }}
+          WELCOME_MESSAGE_DELAY_MINUTES: ${{ secrets.WELCOME_MESSAGE_DELAY_MINUTES }}
