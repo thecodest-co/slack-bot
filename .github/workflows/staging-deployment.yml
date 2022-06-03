@@ -39,3 +39,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          CONVERSATION_BUILDER_API_KEY: ${{ secrets.CONVERSATION_BUILDER_API_KEY }}
+          WELCOME_MESSAGE_DELAY_DAYS: ${{ secrets.WELCOME_MESSAGE_DELAY_DAYS }}
+          WELCOME_MESSAGE_DELAY_HOURS: ${{ secrets.WELCOME_MESSAGE_DELAY_HOURS }}
+          WELCOME_MESSAGE_DELAY_MINUTES: ${{ secrets.WELCOME_MESSAGE_DELAY_MINUTES }}
