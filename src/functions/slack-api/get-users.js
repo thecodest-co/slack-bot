@@ -1,11 +1,11 @@
 const {awsLambdaReceiver} = require("../../helpers/aws-slack-bot");
-const {userService} = require("../../helpers/users");
+const userService = require("../../helpers/user-service");
 
 module.exports.handler = async (event, context, callback) => {
     const handler = await awsLambdaReceiver.start();
 
     try {
-        const users = userService.getAllValidUsers();
+        const users = await userService.getAllValidUsers();
         callback(null, {
             statusCode: 200,
             body: JSON.stringify(users)

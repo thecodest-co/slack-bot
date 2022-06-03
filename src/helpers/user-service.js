@@ -12,8 +12,7 @@ function isNotBot(user) {
     const defaultSlackbotId = 'USLACKBOT';
     return !user.is_bot &&
         //default Slackbot added by Slack has set is_bot as false, so it has to be filtered out by id
-        !user.id !== "U03DHCDSE01" &&
-        !user.id !== defaultSlackbotId;
+        user.id !== defaultSlackbotId;
 }
 
 function isNotGuest(user) {

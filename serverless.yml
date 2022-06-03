@@ -1,4 +1,4 @@
-service: serverless-slackbot
+service: slackbot
 frameworkVersion: '2'
 
 provider:
@@ -22,9 +22,6 @@ provider:
       - value: ${env:CONVERSATION_BUILDER_API_KEY}
         description: Api key for conversation builder app
         customerId: conversation-builder
-      - value: ${env:HELLO_WORLD_API_KEY}
-        description: Api key for hello world app
-        customerId: hello-world
 
 functions:
   handle-events:
@@ -60,7 +57,7 @@ functions:
           private: true
 
   create-converstaions:
-    handler: src/functions/bot/create-conversation.handler
+    handler: src/functions/slack-api/create-conversation.handler
     events:
       - http:
           path: slack/conversations
