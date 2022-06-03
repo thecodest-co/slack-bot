@@ -13,7 +13,7 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "serverless": "^3.17.0",
+    "serverless": "^2.72.3",
     "serverless-offline": "^8.7.0"
   }
 }
