@@ -1,15 +1,15 @@
 name: Build & deploy to stagging
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [ develop ]
   pull_request:
-    branches: [ develop ]
+    branches:
+      - develop
+    types: [ closed ]
 
 
 jobs:
-  build:
+  build_if_merged:
+    if: ${{ github.event.pull_request.merged }}
     name: Build & Deploy
     runs-on: ubuntu-latest
     environment: staging
