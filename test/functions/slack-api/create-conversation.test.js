@@ -35,13 +35,15 @@ describe('Create conversation', () => {
                 expect(statusCode).to.exist;
                 expect(statusCode).to.equal(200);
 
-                // eslint-disable-next-line no-unused-expressions
-                expect(body.id).to.exist;
-                expect(body.id).to.equal('123456');
+                const bodyObject = JSON.parse(body);
 
                 // eslint-disable-next-line no-unused-expressions
-                expect(body.name).to.exist;
-                expect(body.name).to.equal('test-channel-name');
+                expect(bodyObject.id).to.exist;
+                expect(bodyObject.id).to.equal('123456');
+
+                // eslint-disable-next-line no-unused-expressions
+                expect(bodyObject.name).to.exist;
+                expect(bodyObject.name).to.equal('test-channel-name');
 
                 done();
             })
