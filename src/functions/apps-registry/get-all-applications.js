@@ -1,20 +1,19 @@
-const appsRegistry = require('../../helpers/apps-registry')
+const appsRegistry = require('../../helpers/apps-registry');
+const { mapToErrorDTO } = require('../../model/rest-dto-mapper');
 
-module.exports.handler = (event, context, callback) => {
+module.exports.handler = async (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
-    appsRegistry.getAll()
-        .then(res => {
-            callback(null, {
-                statusCode: 200,
-                body: JSON.stringify(res)
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            callback(null, {
-                statusCode: e.statusCode || 500,
-                body: 'Error: Could not find applications. Reason: \n ' + e
-            })
-        })
+    try {
+        const applications = await appsRegistry.getAll();
+        callback(null, {
+            statusCode: 200,
+            body: JSON.stringify({ applications }),
+        });
+    } catch (error) {
+        callback(null, {
+            statusCode: error.statusCode || 500,
+            body: mapToErrorDTO('Error: Could not find applications', error),
+        });
+    }
 };
