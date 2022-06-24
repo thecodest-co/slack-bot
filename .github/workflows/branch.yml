@@ -2,11 +2,8 @@ name: Build & deploy to stagging
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ develop ]
   pull_request:
     branches: [ develop ]
-
 
 jobs:
   build:
