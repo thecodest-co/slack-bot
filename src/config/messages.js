@@ -10,5 +10,5 @@ You probably wonder what else do I do? There you go:
 - I'm still a rookie, but learning new things damn fast! :congaparrot:
 Enjoy your ride with us and remember to never stop being cool. :sunglasses:
 
-Peace.:peace-out:`
-}
+Peace.:peace-out:`,
+};

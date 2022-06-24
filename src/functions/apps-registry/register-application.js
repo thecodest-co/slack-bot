@@ -1,20 +1,20 @@
-const appsRegistry = require('../../helpers/apps-registry')
+const appsRegistry = require('../../helpers/apps-registry');
+const { mapToErrorDTO, mapToBaseDTO } = require('../../model/rest-dto-mapper');
 
-module.exports.handler = (event, context, callback) => {
+module.exports.handler = async (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
     const appData = JSON.parse(event.body);
-    appsRegistry.addApp(appData.name, appData.url, appData.events)
-        .then(() => {
-            callback(null, {
-                statusCode: 200,
-                body: "App registered successfully!"
-            })
-        })
-        .catch(e => {
-            callback(null, {
-                statusCode: e.statusCode || 500,
-                body: "Could not register application. Reason: \n" + e
-            })
-        })
+    try {
+        const appId = await appsRegistry.addApp(appData.name, appData.url, appData.events);
+        callback(null, {
+            statusCode: 200,
+            body: mapToBaseDTO(`App registered successfully with id ${appId}`),
+        });
+    } catch (error) {
+        callback(null, {
+            statusCode: error.statusCode || 500,
+            body: mapToErrorDTO('Could not register application', error),
+        });
+    }
 };

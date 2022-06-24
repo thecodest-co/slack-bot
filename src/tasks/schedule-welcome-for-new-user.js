@@ -1,14 +1,14 @@
-const {botApp} = require("../helpers/aws-slack-bot");
-const {getWelcomeMessageForNewUser} = require("../config/messages");
+const { botApp } = require('../helpers/aws-slack-bot');
+const { getWelcomeMessageForNewUser } = require('../config/messages');
 
 async function scheduleWelcomeForNewUser(user) {
     const message = getWelcomeMessageForNewUser(user.id);
-    //scheduleMessage requires integer of unix epoch in seconds
+    // scheduleMessage requires integer of unix epoch in seconds
     const roundedScheduleDateInUnixEpoch = Math.round(getScheduleDate().getTime() / 1000);
     await botApp.client.chat.scheduleMessage({
         channel: user.id,
         text: message,
-        post_at: roundedScheduleDateInUnixEpoch
+        post_at: roundedScheduleDateInUnixEpoch,
     });
 }
 
@@ -22,5 +22,5 @@ function getScheduleDate() {
 }
 
 module.exports = {
-    scheduleWelcomeForNewUser
-}
+    scheduleWelcomeForNewUser,
+};
