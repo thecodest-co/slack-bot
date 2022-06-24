@@ -2,13 +2,14 @@ name: Build & deploy to stagging
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches:
+      - develop
     types: [ closed ]
 
 
 jobs:
   build_if_merged:
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged }}
     name: Build & Deploy
     runs-on: ubuntu-latest
     environment: staging
