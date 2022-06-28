@@ -1,4 +1,4 @@
-const {App, AwsLambdaReceiver} = require('@slack/bolt');
+const { App, AwsLambdaReceiver } = require('@slack/bolt');
 
 // Initialize your custom receiver
 const awsLambdaReceiver = new AwsLambdaReceiver({
@@ -13,5 +13,5 @@ const botApp = new App({
 
 module.exports = {
     botApp,
-    awsLambdaReceiver
-}
+    awsLambdaReceiver,
+};

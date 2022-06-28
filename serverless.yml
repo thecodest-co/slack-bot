@@ -23,6 +23,9 @@ provider:
         description: Api key for conversation builder app
         customerId: conversation-builder
 
+plugins:
+  - serverless-offline
+
 functions:
   handle-events:
     handler: src/functions/slack-api/handle-events.handler
@@ -42,6 +45,7 @@ functions:
 
   broadcast-message:
     handler: src/functions/slack-api/broadcast-message.handler
+    timeout: 30
     events:
       - http:
           path: slack/broadcast-message
@@ -79,6 +83,3 @@ functions:
           path: applications
           method: post
           private: true
-
-plugins:
-  - serverless-offline
