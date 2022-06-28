@@ -6,7 +6,8 @@ on:
     branches: [ develop ]
 
 jobs:
-  build:
+  build_if_merged:
+    if: ${{ github.event.pull_request.merged }}
     name: Build & Deploy
     runs-on: ubuntu-latest
     environment: staging
