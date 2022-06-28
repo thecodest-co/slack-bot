@@ -1,13 +1,12 @@
 name: Build & deploy to prod
 
 on:
-  pull_request:
+  workflow_dispatch:
+  push:
     branches: [main]
-    types: [closed]
 
 jobs:
-  build_if_merged:
-    if: github.event.pull_request.merged == true
+  build:
     name: Build & Deploy
     runs-on: ubuntu-latest
     environment: prod

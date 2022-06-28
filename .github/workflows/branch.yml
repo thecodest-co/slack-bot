@@ -1,9 +1,11 @@
-name: Build & deploy to stagging
+name: Build & test
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [ develop ]
+  push:
+    branches-ignore:
+      - develop
+      - main
 
 jobs:
   build:
