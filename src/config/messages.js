@@ -11,4 +11,11 @@ You probably wonder what else do I do? There you go:
 Enjoy your ride with us and remember to never stop being cool. :sunglasses:
 
 Peace.:peace-out:`,
+
+    getAnniversaryMessageForUser: (userId) => `Happy anniversary <@${userId}>!
+
+May this journey of corporate success continue in the coming years.
+Congratulations on the monumental occasion. Wishing many more successes in the future.
+
+Let’s make this big day fabulous. :partying_face:`,
 };

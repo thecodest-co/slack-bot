@@ -17,6 +17,13 @@ provider:
     WELCOME_MESSAGE_DELAY_DAYS: ${env:WELCOME_MESSAGE_DELAY_DAYS}
     WELCOME_MESSAGE_DELAY_HOURS: ${env:WELCOME_MESSAGE_DELAY_HOURS}
     WELCOME_MESSAGE_DELAY_MINUTES: ${env:WELCOME_MESSAGE_DELAY_MINUTES}
+    ANNIVERSARY_MESSAGE_CHANNEL: ${env:ANNIVERSARY_MESSAGE_CHANNEL}
+    ANNIVERSARY_MESSAGE_HOURS: ${env:ANNIVERSARY_MESSAGE_HOURS}
+    ANNIVERSARY_MESSAGE_MINUTES: ${env:ANNIVERSARY_MESSAGE_MINUTES}
+    ANNIVERSARY_MESSAGE_DELAY_IN_SECONDS: ${env:ANNIVERSARY_MESSAGE_DELAY_IN_SECONDS}
+    ANNIVERSARY_SPREADSHEET_ID: ${env:ANNIVERSARY_SPREADSHEET_ID}
+    GOOGLE_SERVICE_ACCOUNT_EMAIL: ${env:GOOGLE_SERVICE_ACCOUNT_EMAIL}
+    GOOGLE_PRIVATE_KEY: ${env:GOOGLE_PRIVATE_KEY}
   apiGateway:
     apiKeys:
       - value: ${env:CONVERSATION_BUILDER_API_KEY}
@@ -25,6 +32,7 @@ provider:
 
 plugins:
   - serverless-offline
+  - serverless-offline-scheduler
 
 functions:
   handle-events:
@@ -83,3 +91,9 @@ functions:
           path: applications
           method: post
           private: true
+
+  send-anniversary-message:
+    handler: src/functions/cron/send-anniversary-message.func
+    events:
+      # run every day at 9:00AM UTC
+      - schedule: cron(0 9 * * ? *)

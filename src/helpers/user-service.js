@@ -4,7 +4,15 @@ async function getAllValidUsers() {
     const result = await botApp.client.users.list();
     return result.members.filter((u) => isNotBot(u))
         .filter((u) => isNotGuest(u))
-        .filter((u) => istNotOnVacation(u))
+        .filter((u) => isNotOnVacation(u))
+        .filter((u) => !u.deleted)
+        .map((u) => mapToUserDTO(u));
+}
+
+async function getSlackUsers() {
+    const result = await botApp.client.users.list();
+    return result.members.filter((u) => isNotBot(u))
+        .filter((u) => isNotGuest(u))
         .filter((u) => !u.deleted)
         .map((u) => mapToUserDTO(u));
 }
@@ -21,7 +29,7 @@ function isNotGuest(user) {
         && !user.is_ultra_restricted;
 }
 
-function istNotOnVacation(user) {
+function isNotOnVacation(user) {
     const palmTreeEmoji = ':palm_tree:';
     // currently, this is the only way we can distinct if someone's on vacation
     return user.profile.status_emoji !== palmTreeEmoji;
@@ -32,9 +40,11 @@ function mapToUserDTO(member) {
         id: member.id,
         teamId: member.team_id,
         name: member.name,
+        real_name: member.real_name,
     };
 }
 
 module.exports = {
+    getSlackUsers,
     getAllValidUsers,
 };
