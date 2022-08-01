@@ -12,9 +12,13 @@
     "@slack/bolt": "^3.2.0",
     "axios": "^0.26.1",
     "chai": "^4.3.6",
+    "date-fns": "^2.29.1",
+    "google-spreadsheet": "^3.3.0",
     "lambda-tester": "^4.0.1",
     "mocha": "^10.0.0",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "ramda": "^0.28.0",
+    "string-similarity": "^4.0.4"
   },
   "devDependencies": {
     "eslint": "^8.17.0",
