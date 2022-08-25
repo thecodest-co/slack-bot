@@ -22,6 +22,9 @@ provider:
       - value: ${env:CONVERSATION_BUILDER_API_KEY}
         description: Api key for conversation builder app
         customerId: conversation-builder
+      - value: ${env:JOKE_SENDER_API_KEY}
+        description: Api key for joke sender app
+        customerId: joke-sender
 
 plugins:
   - serverless-offline
