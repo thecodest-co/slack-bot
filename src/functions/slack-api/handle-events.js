@@ -22,6 +22,14 @@ botApp.event(events.TEAM_JOIN_EVENT, async ({ event, logger }) => {
     }
 });
 
+botApp.event(events.APP_MENTION, async ({ event, logger }) => {
+    try {
+        await appsRegistry.notifyAllBy(dbEvents.APP_MENTION, event);
+    } catch (error) {
+        logger.error(error);
+    }
+}); 
+
 module.exports.handler = async (event, context, callback) => {
     const handler = await awsLambdaReceiver.start();
     return handler(event, context, callback);
