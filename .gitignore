@@ -4,3 +4,4 @@
 /.serverless/
 config.json
 db_test.js
+**/.DS_Store
