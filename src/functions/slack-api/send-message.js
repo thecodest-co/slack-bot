@@ -10,6 +10,7 @@ module.exports.handler = async (event, context, callback) => {
         await botApp.client.chat.postMessage({
             channel: data.channel,
             text: data.text,
+            thread_ts: data.thread_ts,
         });
         callback(null, {
             statusCode: 200,
